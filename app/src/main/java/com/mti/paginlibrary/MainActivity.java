@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.mti.paginlibrary.api.RetrofitClient;
 import com.mti.paginlibrary.util.Constants;
@@ -86,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) searchMenuItem.getActionView();
 
-        searchView.setSearchableInfo(searchManager.
+       /* searchView.setSearchableInfo(searchManager.
                 getSearchableInfo(getComponentName()));
-        searchView.setSubmitButtonEnabled(true);
+        searchView.setSubmitButtonEnabled(true);*/
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         query=query.trim();
         if(!query.isEmpty()){
        //     RetrofitClient.getInstance().getApiService().
+            Toast.makeText(this, "Search: "+query, Toast.LENGTH_SHORT).show();
         }
 
             }
