@@ -6,15 +6,14 @@
 
 package com.mti.paginlibrary;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 
+import com.mti.paginlibrary.api.RetrofitClient;
 import com.mti.paginlibrary.model.Outlet;
 import com.mti.paginlibrary.model.OutletResponse;
+import com.mti.paginlibrary.util.Constants;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,10 +24,6 @@ import retrofit2.Response;
  * Created by mtita on 19,May,2019.
  */
 public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
-
-    public enum NETWORK_STATE{
-        LOADING, LOADED, ERROR
-    }
 
     private static final int FIRST_PAGE = 1;
     private MutableLiveData networkState;
@@ -48,7 +43,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Outlet> callback) {
 
-        networkState.postValue(NETWORK_STATE.LOADING);
+        networkState.postValue(Constants.NETWORK_STATE.LOADING);
 
         RetrofitClient.getInstance().getApiService()
                 .getOutlet(FIRST_PAGE)
@@ -60,11 +55,11 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
 
                             callback.onResult(response.body().getResult().getOutlet(), null, FIRST_PAGE + 1);
 
-                            networkState.postValue(NETWORK_STATE.LOADED);
+                            networkState.postValue(Constants.NETWORK_STATE.LOADED);
 
                         }else{
 
-                            networkState.postValue(NETWORK_STATE.ERROR);
+                            networkState.postValue(Constants.NETWORK_STATE.ERROR);
                         }
                     }
 
@@ -77,7 +72,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
 
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Outlet> callback) {
-        networkState.postValue(NETWORK_STATE.LOADING);
+        networkState.postValue(Constants.NETWORK_STATE.LOADING);
 
         RetrofitClient.getInstance().getApiService()
                 .getOutlet(params.key)
@@ -88,9 +83,9 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
 
                             Integer key = (params.key > 1) ? params.key - 1 : null;
                             callback.onResult(response.body().getResult().getOutlet(), key);
-                            networkState.postValue(NETWORK_STATE.LOADED);
+                            networkState.postValue(Constants.NETWORK_STATE.LOADED);
                         }else{
-                            networkState.postValue(NETWORK_STATE.ERROR);
+                            networkState.postValue(Constants.NETWORK_STATE.ERROR);
                         }
                     }
 
@@ -104,7 +99,7 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Outlet> callback) {
 
-        networkState.postValue(NETWORK_STATE.LOADING);
+        networkState.postValue(Constants.NETWORK_STATE.LOADING);
 
 
         RetrofitClient.getInstance().getApiService().getOutlet(params.key)
@@ -116,9 +111,9 @@ public class ItemDataSource extends PageKeyedDataSource<Integer, Outlet> {
 
                             Integer key = response.body().getNextPage() > -1 ? params.key + 1 : null;
                             callback.onResult(response.body().getResult().getOutlet(), key);
-                            networkState.postValue(NETWORK_STATE.LOADED);
+                            networkState.postValue(Constants.NETWORK_STATE.LOADED);
                         }else{
-                            networkState.postValue(NETWORK_STATE.ERROR);
+                            networkState.postValue(Constants.NETWORK_STATE.ERROR);
                         }
 
                     }

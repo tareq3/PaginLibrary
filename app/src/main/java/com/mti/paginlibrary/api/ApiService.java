@@ -1,10 +1,16 @@
 /*
+ * Created by Tareq Islam on 5/20/19 1:02 PM
+ *
+ *  Last modified 5/19/19 4:09 PM
+ */
+
+/*
  * Created by Tareq Islam on 5/19/19 10:39 AM
  *
  *  Last modified 5/19/19 10:39 AM
  */
 
-package com.mti.paginlibrary;
+package com.mti.paginlibrary.api;
 
 import com.mti.paginlibrary.model.OutletResponse;
 

@@ -1,10 +1,18 @@
 /*
+ * Created by Tareq Islam on 5/20/19 1:02 PM
+ *
+ *  Last modified 5/19/19 4:27 PM
+ */
+
+/*
  * Created by Tareq Islam on 5/19/19 10:34 AM
  *
  *  Last modified 5/19/19 10:34 AM
  */
 
-package com.mti.paginlibrary;
+package com.mti.paginlibrary.api;
+
+import com.mti.paginlibrary.util.HttpAuthInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

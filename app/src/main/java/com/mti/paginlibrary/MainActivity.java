@@ -13,15 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.mti.paginlibrary.model.OutletResponse;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.mti.paginlibrary.util.Constants;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -46,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
             adapter.submitList(items);
         });
 
-        itemViewModel.getNetworkState().observe(this, new Observer<ItemDataSource.NETWORK_STATE>() {
+        itemViewModel.getNetworkState().observe(this, new Observer<Constants.NETWORK_STATE>() {
             @Override
-            public void onChanged(ItemDataSource.NETWORK_STATE networkState) {
-                if(networkState.equals(ItemDataSource.NETWORK_STATE.LOADING))
+            public void onChanged(Constants.NETWORK_STATE networkState) {
+                if(networkState.equals(Constants.NETWORK_STATE.LOADING))
                     showProgress();
                 else
                     hideProgress();

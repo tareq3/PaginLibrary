@@ -14,6 +14,7 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
 import com.mti.paginlibrary.model.Outlet;
+import com.mti.paginlibrary.util.Constants;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -25,17 +26,17 @@ public class ItemViewModel extends ViewModel {
     LiveData<PagedList<Outlet>> itemPagedList;
 
     private Executor executor;
-    private LiveData<ItemDataSource.NETWORK_STATE> networkState;
+    private LiveData<Constants.NETWORK_STATE> networkState;
 
     public ItemViewModel() {
-        executor = Executors.newFixedThreadPool(50);
+        executor = Executors.newFixedThreadPool(5);
 
         ItemDataSourceFactory itemDataSourceFactory = new ItemDataSourceFactory();
 
         //By using switchMap getting data of NetworkState from ItemDataSourceFactory
-        networkState = Transformations.switchMap(itemDataSourceFactory.getItemLiveDataSource(), new Function<ItemDataSource, LiveData<ItemDataSource.NETWORK_STATE>>() {
+        networkState = Transformations.switchMap(itemDataSourceFactory.getItemLiveDataSource(), new Function<ItemDataSource, LiveData<Constants.NETWORK_STATE>>() {
             @Override
-            public LiveData<ItemDataSource.NETWORK_STATE> apply(ItemDataSource input) {
+            public LiveData<Constants.NETWORK_STATE> apply(ItemDataSource input) {
                 return input.getNewtworkState();
             }
         });
@@ -43,14 +44,14 @@ public class ItemViewModel extends ViewModel {
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(false)
-                .setPageSize(12)
+                .setPageSize(50)
                 .build();
 
         itemPagedList = (new LivePagedListBuilder(itemDataSourceFactory, config))
                 .setFetchExecutor(executor).build();
     }
 
-    public LiveData<ItemDataSource.NETWORK_STATE> getNetworkState() {
+    public LiveData<Constants.NETWORK_STATE> getNetworkState() {
         return networkState;
     }
 

@@ -1,10 +1,16 @@
 /*
+ * Created by Tareq Islam on 5/20/19 12:58 PM
+ *
+ *  Last modified 5/19/19 3:12 PM
+ */
+
+/*
  * Created by Tareq Islam on 5/19/19 3:11 PM
  *
  *  Last modified 5/19/19 1:08 PM
  */
 
-package com.mti.paginlibrary;
+package com.mti.paginlibrary.util;
 
 import android.util.Base64;
 
