@@ -44,7 +44,7 @@ public class ItemViewModel extends ViewModel {
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(false)
-                .setPageSize(50)
+                .setPageSize(Constants.PAGE_SIZE)
                 .build();
 
         itemPagedList = (new LivePagedListBuilder(itemDataSourceFactory, config))
@@ -58,4 +58,6 @@ public class ItemViewModel extends ViewModel {
     public LiveData<PagedList<Outlet>> getItemPagedList() {
         return itemPagedList;
     }
+
+
 }

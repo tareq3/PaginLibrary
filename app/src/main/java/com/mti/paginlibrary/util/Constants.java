@@ -20,6 +20,6 @@ public class Constants {
         LOADING, LOADED, ERROR
     }
 
-    public static final int PAGE_SIZE = 50;
+    public static final int PAGE_SIZE = 100;
 
 }
